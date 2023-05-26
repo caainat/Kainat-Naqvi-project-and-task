@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Guess the Number</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background-color: #2b0b2f;
+    }
+    
+    h1 {
+      color: #f4eef2;
+    }
+    
+    #game {
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #e3abdf;
+      border-radius: 5px;
+      width: 600px;
+    }
+    
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #2b2069;
+      color: #e7eaec;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    
+    #message {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Guess the Number</h1>
+  
+  <div id="game">
+    <p>Guess a number between 1 and 20:</p>
+    <input type="number" id="guessInput" min="1" max="20">
+    <button id="guessButton">Submit</button>
+    <p id="score">Score: <span id="scoreValue">10</span></p>
+    <p id="message"></p>
+    <button id="playAgainButton" style="display: none;">Play Again</button>
+  </div>
+  
+  <script>
+    // Generate a random number between 1 and 20
+    const hiddenNumber = Math.floor(Math.random() * 20) + 1;
+    
+    let score = 10;
+    
+    const guessInput = document.getElementById('guessInput');
+    const guessButton = document.getElementById('guessButton');
+    const scoreValue = document.getElementById('scoreValue');
+    const message = document.getElementById('message');
+    const playAgainButton = document.getElementById('playAgainButton');
+    
+    guessButton.addEventListener('click', () => {
+      const guess = parseInt(guessInput.value);
+      
+      if (guess === hiddenNumber) {
+        message.textContent = `Congratulations! You guessed the number ${hiddenNumber}.`;
+        guessInput.disabled = true;
+        guessButton.disabled = true;
+        playAgainButton.style.display = 'block';
+      } else {
+        score--;
+        scoreValue.textContent = score;
+        
+        if (score === 0) {
+          message.textContent = `Game Over! The hidden number was ${hiddenNumber}.`;
+          guessInput.disabled = true;
+          guessButton.disabled = true;
+          playAgainButton.style.display = 'block';
+        } else {
+          message.textContent = guess > hiddenNumber ? 'Too high. Try again!' : 'Too low. Try again!';
+        }
+      }
+    });
+    
+    playAgainButton.addEventListener('click', () => {
+      // Reset the game
+      hiddenNumber = Math.floor(Math.random() * 20) + 1;
+      score = 10;
+      guessInput.disabled = false;
+      guessButton.disabled = false;
+      scoreValue.textContent = score;
+      message.textContent = '';
+      guessInput.value = '';
+      playAgainButton.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
