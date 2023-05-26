@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Calculator</title>
+  <style>
+    body {
+      background-color: rgb(234, 234, 163);
+    }
+
+    .calculator {
+      width: 250px;
+      background-color: pink;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .calculator input[type="text"] {
+      width: 90%;
+      margin-bottom: 20px;
+      padding: 5px;
+      font-size: 18px;
+    }
+
+    .calculator button {
+      width: 45px;
+      height: 45px;
+      font-size: 18px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" disabled>
+    <button onclick="appendNumber(7)">7</button>
+    <button onclick="appendNumber(8)">8</button>
+    <button onclick="appendNumber(9)">9</button>
+    <button onclick="appendNumber(4)">4</button>
+    <button onclick="appendNumber(5)">5</button>
+    <button onclick="appendNumber(6)">6</button>
+    <button onclick="appendNumber(1)">1</button>
+    <button onclick="appendNumber(2)">2</button>
+    <button onclick="appendNumber(3)">3</button>
+    <button onclick="appendOperator('*')">*</button>
+    <button onclick="appendNumber(0)">0</button>
+    <button onclick="appendOperator('/')">/</button>
+    <button onclick="appendOperator('-')">-</button>
+    <button onclick="appendOperator('+')">+</button>
+    <button onclick="clearDisplay()">C</button>
+    <button onclick="calculate()">=</button>
+  </div>
+
+  <script>
+    function clearDisplay() {
+      document.getElementById('display').value = '';
+    }
+
+    function appendNumber(number) {
+      document.getElementById('display').value += number;
+    }
+
+    function appendOperator(operator) {
+      document.getElementById('display').value += operator;
+    }
+
+    function calculate() {
+      let result = eval(document.getElementById('display').value);
+      document.getElementById('display').value = result;
+    }
+  </script>
+</body>
+</html>
